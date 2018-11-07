@@ -68,3 +68,16 @@ void Mask::setBlueShift(int val)
 {
     this->b_shift = val;
 }
+
+void Mask::autoNorm()
+{
+    double s = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            s += this->matrix[i][j];
+        }
+    }
+    this->norm_k = s;
+}

@@ -61,18 +61,27 @@ MainWindow::MainWindow(QWidget *parent) :
                                                   QString("Копировать изображение из правой зоны в левую"),
                                                   this->controller, SLOT(cpDSTtoSRC())));
 
-    this->ui->filter_bar->addAction(createAction(QString("Идентичное преобразование"),
-                                                  QString("Идентичное преобразование"),
-                                                  this->controller, SLOT(identical())));
     this->ui->filter_bar->addAction(createAction(QString("Оттенки серого"),
-                                                  QString("Перевести изображение в оттенки серого"),
-                                                  this->controller, SLOT(grayscale())));
+                                                 QString("Перевести изображение в оттенки серого"),
+                                                 this->controller, SLOT(grayscale())));
+    this->ui->filter_bar->addAction(createAction(QString("Сглаживание"),
+                                                 QString("Размытие изображения"),
+                                                 this->controller, SLOT(blur())));
+    this->ui->filter_bar->addAction(createAction(QString("Резкость"),
+                                                 QString("Повышение резкости изображения"),
+                                                 this->controller, SLOT(sharpen())));
+    this->ui->filter_bar->addAction(createAction(QString("Идентичное преобразование"),
+                                                 QString("Идентичное преобразование"),
+                                                 this->controller, SLOT(identical())));
     this->ui->filter_bar->addAction(createAction(QString("Негатив"),
-                                                  QString("Перевести изображение в негатив"),
-                                                  this->controller, SLOT(negative())));
+                                                 QString("Перевести изображение в негатив"),
+                                                 this->controller, SLOT(negative())));
+    this->ui->filter_bar->addAction(createAction(QString("Тиснение"),
+                                                 QString("Тиснение"),
+                                                 this->controller, SLOT(embossing())));
     this->ui->filter_bar->addAction(createAction(QString("Матричное преобразование"),
-                                                  QString("Произвольное матричное 3х3 преобразование"),
-                                                  this->controller, SLOT(matrixTransmition())));
+                                                 QString("Произвольное матричное 3х3 преобразование"),
+                                                 this->controller, SLOT(matrixTransmition())));
 }
 
 MainWindow::~MainWindow()

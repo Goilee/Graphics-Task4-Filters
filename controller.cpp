@@ -71,12 +71,38 @@ void Controller::edgeDetection()
 
 void Controller::blur()
 {
-    // TODO
+    this->mask.set(-1, -1, 1);
+    this->mask.set(-1, 0, 2);
+    this->mask.set(-1, 1, 1);
+    this->mask.set(0, -1, 2);
+    this->mask.set(0, 0, 4);
+    this->mask.set(0, 1, 2);
+    this->mask.set(1, -1, 1);
+    this->mask.set(1, 0, 2);
+    this->mask.set(1, 1, 1);
+    this->mask.autoNorm();
+    this->mask.setRedShift(0);
+    this->mask.setGreenShift(0);
+    this->mask.setBlueShift(0);
+    this->applyMatrixTransmition();
 }
 
 void Controller::sharpen()
 {
-    // TODO
+    this->mask.set(-1, -1, 0);
+    this->mask.set(-1, 0, -1);
+    this->mask.set(-1, 1, 0);
+    this->mask.set(0, -1, -1);
+    this->mask.set(0, 0, 5);
+    this->mask.set(0, 1, -1);
+    this->mask.set(1, -1, 0);
+    this->mask.set(1, 0, -1);
+    this->mask.set(1, 1, 0);
+    this->mask.autoNorm();
+    this->mask.setRedShift(0);
+    this->mask.setGreenShift(0);
+    this->mask.setBlueShift(0);
+    this->applyMatrixTransmition();
 }
 
 void Controller::identical()
@@ -91,7 +117,21 @@ void Controller::negative()
 
 void Controller::embossing()
 {
-    // TODO
+    this->mask.set(-1, -1, 0);
+    this->mask.set(-1, 0, 1);
+    this->mask.set(-1, 1, 0);
+    this->mask.set(0, -1, -1);
+    this->mask.set(0, 0, 0);
+    this->mask.set(0, 1, 1);
+    this->mask.set(1, -1, 0);
+    this->mask.set(1, 0, -1);
+    this->mask.set(1, 1, 0);
+    this->mask.setNorm(1);
+    this->mask.setRedShift(128);
+    this->mask.setGreenShift(128);
+    this->mask.setBlueShift(128);
+    this->applyMatrixTransmition();
+    this->model->setDSTimage(photoshop::grayscale(this->model->getDSTimage()));
 }
 
 void Controller::watercolor()

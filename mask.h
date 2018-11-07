@@ -23,6 +23,7 @@ public /*methods*/:
     void setRedShift(int val);
     void setGreenShift(int val);
     void setBlueShift(int val);
+    void autoNorm();
 };
 
 #endif // MASK_H

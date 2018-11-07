@@ -42,7 +42,7 @@ QPushButton * createButtonAndConnect(QString name, QObject *reciever, const char
     return button;
 }
 
-double MaskParamDialog::autoNormCalc()
+void MaskParamDialog::autoNorm()
 {
     double s = 0;
     for (int i = 0; i < 3; i++)
@@ -52,12 +52,7 @@ double MaskParamDialog::autoNormCalc()
             s += this->matrix_edits[i][j]->text().toDouble();
         }
     }
-    return s;
-}
-
-void MaskParamDialog::autoNorm()
-{
-    this->norm_edit->setText(QString::number(this->autoNormCalc()));
+    this->norm_edit->setText(QString::number(s));
 }
 
 MaskParamDialog::MaskParamDialog(Mask *mask) :
@@ -92,7 +87,7 @@ MaskParamDialog::MaskParamDialog(Mask *mask) :
 
     // строка редактирования норм.коэффициента
     QLayout *norm_edit_layout = new QHBoxLayout();
-    this->norm_edit = createDoubleInput(QString::number(this->autoNormCalc()));
+    this->norm_edit = createDoubleInput(QString::number(this->mask->norm()));
     norm_edit->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     norm_edit_layout->addWidget(norm_edit);
     norm_edit_layout->addWidget(createButtonAndConnect(QString("Авто"), this, SLOT(autoNorm())));
