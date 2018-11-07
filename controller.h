@@ -3,12 +3,17 @@
 
 #include <QObject>
 #include "model.h"
+#include "mask.h"
+#include "maskparamdialog.h"
 
 class Controller : public QObject
 {
     Q_OBJECT
 private /*fields*/:
     Model *model;
+    Mask mask;
+    MaskParamDialog *mask_dialog;
+
 
 public /*methods*/:
     explicit Controller(Model *model, QObject *parent = nullptr);
@@ -31,6 +36,9 @@ public slots:
     void watercolor();
     void gamma();
     void matrixTransmition();
+
+private slots:
+    void applyMatrixTransmition();
 };
 
 #endif // CONTROLLER_H

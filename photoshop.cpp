@@ -1,5 +1,18 @@
 #include "photoshop.h"
 
+int doubleToColorComponent(double val)
+{
+    if (val > 255)
+    {
+        return 255;
+    }
+    else if (val < 0)
+    {
+        return 0;
+    }
+    else return (int) (val + 0.5);
+}
+
 namespace photoshop
 {
     QImage grayscale(QImage image)
@@ -85,9 +98,66 @@ namespace photoshop
         return image;
     }
 
-    QImage matrixTransmition(QImage image)
+    QImage matrixTransmition(QImage image, Mask mask)
     {
-        // TODO
-        return image;
+        int width = image.width();
+        int height = image.height();
+        QImage result = QImage(image);
+        for (int y = 1; y < height - 1; y++)
+        {
+            for (int x = 1; x < width - 1; x++)  // без краев
+            {
+                double red = 0;
+                double green = 0;
+                double blue = 0;
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        QColor color = image.pixelColor(x + i, y + j);
+                        double k = mask.at(i, j);
+                        red += color.red() * k;
+                        green += color.green() * k;
+                        blue += color.blue() * k;
+                    }
+                }
+                double norm = mask.norm();
+                red = red / norm + mask.red_shift();
+                green = green / norm + mask.green_shift();
+                blue = blue / norm + mask.blue_shift();
+                result.setPixelColor(x, y, QColor(doubleToColorComponent(red), doubleToColorComponent(green), doubleToColorComponent(blue)));
+            }
+        }
+        /*for (int x = 0; x < width; x++)  // y = 0
+        {
+            double red = 0;
+            double green = 0;
+            double blue = 0;
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    QColor color = image.pixelColor(x + i, j);
+                    double k = mask.at(i, j);
+                    red += color.red() * k;
+                    green += color.green() * k;
+                    blue += color.blue() * k;
+                }
+            }
+            double summ = 0;
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    summ += mask.at(i, j);
+                }
+            }
+            double norm = mask.norm() * (summ - mask.at(-1, -1) - mask.at(0, -1) - mask.at(1, -1)) / summ;
+            red = red / norm + mask.red_shift();
+            green = green / norm + mask.green_shift();
+            blue = blue / norm + mask.blue_shift();
+            result.setPixelColor(x, 0, QColor(doubleToColorComponent(red), doubleToColorComponent(green), doubleToColorComponent(blue)));
+        }*/
+        return result;
     }
 }

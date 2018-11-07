@@ -2,6 +2,7 @@
 #define PHOTOSHOP_H
 
 #include <QImage>
+#include "mask.h"
 
 namespace photoshop
 {
@@ -14,7 +15,7 @@ namespace photoshop
     QImage embossing(QImage image);
     QImage watercolor(QImage image);
     QImage gamma(QImage image);
-    QImage matrixTransmition(QImage image);
+    QImage matrixTransmition(QImage image, Mask mask);
 }
 
 #endif // PHOTOSHOP_H

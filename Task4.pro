@@ -32,7 +32,9 @@ SOURCES += \
     model.cpp \
     canvas.cpp \
     srccanvas.cpp \
-    dstcanvas.cpp
+    dstcanvas.cpp \
+    maskparamdialog.cpp \
+    mask.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +43,9 @@ HEADERS += \
     model.h \
     canvas.h \
     srccanvas.h \
-    dstcanvas.h
+    dstcanvas.h \
+    maskparamdialog.h \
+    mask.h
 
 FORMS += \
         mainwindow.ui

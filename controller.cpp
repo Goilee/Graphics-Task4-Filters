@@ -5,9 +5,10 @@
 
 Controller::Controller(Model *model, QObject *parent) :
     QObject(parent),
-    model(model)
+    model(model), mask(Mask())
 {
-
+    this->mask_dialog = new MaskParamDialog(&this->mask);
+    connect(this->mask_dialog, SIGNAL(applied()), this, SLOT(applyMatrixTransmition()));
 }
 
 Controller::~Controller()
@@ -105,5 +106,10 @@ void Controller::gamma()
 
 void Controller::matrixTransmition()
 {
-    // TODO
+    this->mask_dialog->show();
+}
+
+void Controller::applyMatrixTransmition()
+{
+    this->model->setDSTimage(photoshop::matrixTransmition(this->model->getSRCimage(), this->mask));
 }
