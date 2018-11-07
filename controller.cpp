@@ -48,62 +48,62 @@ void Controller::saveToFile()
     }
 }
 
-void Controller::CpSRCtoDST()
+void Controller::cpSRCtoDST()
 {
     this->model->setDSTimage(this->model->getSRCimage());
 }
 
-void Controller::CpDSTtoSRC()
+void Controller::cpDSTtoSRC()
 {
     this->model->setSRCimage(this->model->getDSTimage());
 }
 
-void Controller::Grayscale()
+void Controller::grayscale()
+{
+    this->model->setDSTimage(photoshop::grayscale(this->model->getSRCimage()));
+}
+
+void Controller::edgeDetection()
 {
     // TODO
 }
 
-void Controller::EdgeDetection()
+void Controller::blur()
 {
     // TODO
 }
 
-void Controller::Blur()
+void Controller::sharpen()
 {
     // TODO
 }
 
-void Controller::Sharpen()
+void Controller::identical()
+{
+    this->model->setDSTimage(photoshop::identical(this->model->getSRCimage()));
+}
+
+void Controller::negative()
+{
+    this->model->setDSTimage(photoshop::negative(this->model->getSRCimage()));
+}
+
+void Controller::embossing()
 {
     // TODO
 }
 
-void Controller::Identical()
+void Controller::watercolor()
 {
     // TODO
 }
 
-void Controller::Negative()
+void Controller::gamma()
 {
     // TODO
 }
 
-void Controller::Embossing()
-{
-    // TODO
-}
-
-void Controller::Watercolor()
-{
-    // TODO
-}
-
-void Controller::Gamma()
-{
-    // TODO
-}
-
-void Controller::MatrixTransmition()
+void Controller::matrixTransmition()
 {
     // TODO
 }

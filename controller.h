@@ -19,18 +19,18 @@ signals:
 public slots:
     void newFile();
     void saveToFile();
-    void CpSRCtoDST();
-    void CpDSTtoSRC();
-    void Grayscale();
-    void EdgeDetection();
-    void Blur();
-    void Sharpen();
-    void Identical();
-    void Negative();
-    void Embossing();
-    void Watercolor();
-    void Gamma();
-    void MatrixTransmition();
+    void cpSRCtoDST();
+    void cpDSTtoSRC();
+    void grayscale();
+    void edgeDetection();
+    void blur();
+    void sharpen();
+    void identical();
+    void negative();
+    void embossing();
+    void watercolor();
+    void gamma();
+    void matrixTransmition();
 };
 
 #endif // CONTROLLER_H

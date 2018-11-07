@@ -47,14 +47,27 @@ MainWindow::MainWindow(QWidget *parent) :
     save_to_file_action->setToolTip(QString("Сохранить изображение из левой зоны в файл"));
     connect(save_to_file_action, SIGNAL(triggered()), this->controller, SLOT(saveToFile()));
     this->ui->mainToolBar->addAction(save_to_file_action);
-    QAction *cp_src_to_dst_action = new QAction(QString("SRC->DST"));
+    QAction *cp_src_to_dst_action = new QAction(QString("SRC --> DST"));
     cp_src_to_dst_action->setToolTip(QString("Копировать изображение из левой зоны в правую"));
-    connect(cp_src_to_dst_action, SIGNAL(triggered()), this->controller, SLOT(CpSRCtoDST()));
+    connect(cp_src_to_dst_action, SIGNAL(triggered()), this->controller, SLOT(cpSRCtoDST()));
     this->ui->mainToolBar->addAction(cp_src_to_dst_action);
-    QAction *cp_dst_to_src_action = new QAction(QString("DST->SRC"));
+    QAction *cp_dst_to_src_action = new QAction(QString("SRC <-- DST"));
     cp_src_to_dst_action->setToolTip(QString("Копировать изображение из левой зоны в правую"));
-    connect(cp_dst_to_src_action, SIGNAL(triggered()), this->controller, SLOT(CpDSTtoSRC()));
+    connect(cp_dst_to_src_action, SIGNAL(triggered()), this->controller, SLOT(cpDSTtoSRC()));
     this->ui->mainToolBar->addAction(cp_dst_to_src_action);
+
+    QAction *indent_action = new QAction(QString("Идентичное преобразование"));
+    indent_action->setToolTip(QString("Идентичное преобразование"));
+    connect(indent_action, SIGNAL(triggered()), this->controller, SLOT(identical()));
+    this->ui->filter_bar->addAction(indent_action);
+    QAction *grayscale_action = new QAction(QString("Оттенки серого"));
+    grayscale_action->setToolTip(QString("Перевести изображение в оттенки серого"));
+    connect(grayscale_action, SIGNAL(triggered()), this->controller, SLOT(grayscale()));
+    this->ui->filter_bar->addAction(grayscale_action);
+    QAction *negative_action = new QAction(QString("Негатив"));
+    negative_action->setToolTip(QString("Перевести изображение в негатив"));
+    connect(negative_action, SIGNAL(triggered()), this->controller, SLOT(negative()));
+    this->ui->filter_bar->addAction(negative_action);
 }
 
 MainWindow::~MainWindow()
