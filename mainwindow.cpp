@@ -3,6 +3,8 @@
 
 #include <QHBoxLayout>
 #include <QSizePolicy>
+#include <QMessageBox>
+#include <QFileDialog>
 #include "srccanvas.h"
 #include "dstcanvas.h"
 
@@ -12,7 +14,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     this->ui->setupUi(this);
 
-    this->model = new Model(QImage());  // TODO загрузка файла вместо QImage()
+    QImage image = QImage(":/Lenna.png");
+    if (image.isNull())
+    {
+        QMessageBox msg_box;
+        msg_box.setText("Can't open 'Lenna.png'");
+        msg_box.exec();
+        image = QImage(QFileDialog::getOpenFileName(this,
+                                                    tr("Open file"),
+                                                    QString(),
+                                                    tr("Images (*.png *.jpg *.gif *.bmp)")));
+    }
+    this->model = new Model(image);  // TODO загрузка файла вместо QImage()
 
     QLayout *layout = new QHBoxLayout();
     layout->addWidget(new SrcCanvas(this->model));
