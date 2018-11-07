@@ -47,14 +47,40 @@ namespace photoshop
 
     QImage blur(QImage image)
     {
-        // TODO
-        return image;
+        Mask mask = Mask();
+        mask.set(-1, -1, 1);
+        mask.set(-1, 0, 2);
+        mask.set(-1, 1, 1);
+        mask.set(0, -1, 2);
+        mask.set(0, 0, 4);
+        mask.set(0, 1, 2);
+        mask.set(1, -1, 1);
+        mask.set(1, 0, 2);
+        mask.set(1, 1, 1);
+        mask.autoNorm();
+        mask.setRedShift(0);
+        mask.setGreenShift(0);
+        mask.setBlueShift(0);
+        return photoshop::matrixTransmition(image, mask);
     }
 
     QImage sharpen(QImage image)
     {
-        // TODO
-        return image;
+        Mask mask = Mask();
+        mask.set(-1, -1, 0);
+        mask.set(-1, 0, -1);
+        mask.set(-1, 1, 0);
+        mask.set(0, -1, -1);
+        mask.set(0, 0, 5);
+        mask.set(0, 1, -1);
+        mask.set(1, -1, 0);
+        mask.set(1, 0, -1);
+        mask.set(1, 1, 0);
+        mask.autoNorm();
+        mask.setRedShift(0);
+        mask.setGreenShift(0);
+        mask.setBlueShift(0);
+        return photoshop::matrixTransmition(image, mask);
     }
 
     QImage identical(QImage image)
@@ -82,8 +108,21 @@ namespace photoshop
 
     QImage embossing(QImage image)
     {
-        // TODO
-        return image;
+        Mask mask = Mask();
+        mask.set(-1, -1, 0);
+        mask.set(-1, 0, 1);
+        mask.set(-1, 1, 0);
+        mask.set(0, -1, -1);
+        mask.set(0, 0, 0);
+        mask.set(0, 1, 1);
+        mask.set(1, -1, 0);
+        mask.set(1, 0, -1);
+        mask.set(1, 1, 0);
+        mask.setNorm(1);
+        mask.setRedShift(128);
+        mask.setGreenShift(128);
+        mask.setBlueShift(128);
+        return photoshop::grayscale(photoshop::matrixTransmition(image, mask));
     }
 
     QImage watercolor(QImage image)

@@ -2,6 +2,7 @@
 #include "photoshop.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDialog>
 
 Controller::Controller(Model *model, QObject *parent) :
     QObject(parent),
@@ -66,43 +67,32 @@ void Controller::grayscale()
 
 void Controller::edgeDetection()
 {
+    /*this->mask.set(-1, -1, 0);
+    this->mask.set(-1, 0, -1);
+    this->mask.set(-1, 1, 0);
+    this->mask.set(0, -1, -1);
+    this->mask.set(0, 0, 4);
+    this->mask.set(0, 1, -1);
+    this->mask.set(1, -1, 0);
+    this->mask.set(1, 0, -1);
+    this->mask.set(1, 1, 0);
+    this->mask.setNorm(1);
+    */
+}
+
+void Controller::applyEdgeDetection()
+{
     // TODO
 }
 
 void Controller::blur()
 {
-    this->mask.set(-1, -1, 1);
-    this->mask.set(-1, 0, 2);
-    this->mask.set(-1, 1, 1);
-    this->mask.set(0, -1, 2);
-    this->mask.set(0, 0, 4);
-    this->mask.set(0, 1, 2);
-    this->mask.set(1, -1, 1);
-    this->mask.set(1, 0, 2);
-    this->mask.set(1, 1, 1);
-    this->mask.autoNorm();
-    this->mask.setRedShift(0);
-    this->mask.setGreenShift(0);
-    this->mask.setBlueShift(0);
-    this->applyMatrixTransmition();
+    this->model->setDSTimage(photoshop::blur(this->model->getSRCimage()));
 }
 
 void Controller::sharpen()
 {
-    this->mask.set(-1, -1, 0);
-    this->mask.set(-1, 0, -1);
-    this->mask.set(-1, 1, 0);
-    this->mask.set(0, -1, -1);
-    this->mask.set(0, 0, 5);
-    this->mask.set(0, 1, -1);
-    this->mask.set(1, -1, 0);
-    this->mask.set(1, 0, -1);
-    this->mask.set(1, 1, 0);
-    this->mask.autoNorm();
-    this->mask.setRedShift(0);
-    this->mask.setGreenShift(0);
-    this->mask.setBlueShift(0);
-    this->applyMatrixTransmition();
+    this->model->setDSTimage(photoshop::sharpen(this->model->getSRCimage()));
 }
 
 void Controller::identical()
@@ -117,21 +107,7 @@ void Controller::negative()
 
 void Controller::embossing()
 {
-    this->mask.set(-1, -1, 0);
-    this->mask.set(-1, 0, 1);
-    this->mask.set(-1, 1, 0);
-    this->mask.set(0, -1, -1);
-    this->mask.set(0, 0, 0);
-    this->mask.set(0, 1, 1);
-    this->mask.set(1, -1, 0);
-    this->mask.set(1, 0, -1);
-    this->mask.set(1, 1, 0);
-    this->mask.setNorm(1);
-    this->mask.setRedShift(128);
-    this->mask.setGreenShift(128);
-    this->mask.setBlueShift(128);
-    this->applyMatrixTransmition();
-    this->model->setDSTimage(photoshop::grayscale(this->model->getDSTimage()));
+    this->model->setDSTimage(photoshop::embossing(this->model->getSRCimage()));
 }
 
 void Controller::watercolor()
