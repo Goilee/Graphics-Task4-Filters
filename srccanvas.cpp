@@ -2,7 +2,7 @@
 
 SrcCanvas::SrcCanvas(Model *model, QWidget *parent) : Canvas(model, parent)
 {
-
+    this->updateImage();
 }
 
 SrcCanvas::~SrcCanvas()
@@ -12,5 +12,8 @@ SrcCanvas::~SrcCanvas()
 
 void SrcCanvas::updateImage()
 {
-    // TODO
+    this->image = this->model->getSRCimage();
+    this->image_width = this->image.width();
+    this->image_height = this->image.height();
+    this->update();
 }

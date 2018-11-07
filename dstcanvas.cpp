@@ -12,5 +12,8 @@ DstCanvas::~DstCanvas()
 
 void DstCanvas::updateImage()
 {
-    // TODO
+    this->image = this->model->getDSTimage();
+    this->image_width = this->image.width();
+    this->image_height = this->image.height();
+    this->update();
 }

@@ -16,14 +16,16 @@ private /*fields*/:
 
 public /*methods*/:
     explicit Model(QImage src_image, QObject *parent = nullptr);
+    QImage getSRCimage();
+    QImage getDSTimage();
 
 private /*methods*/:
     void setSRCimage(QImage image);
     void setDSTimage(QImage image);
 
 signals:
-    void SRCimageChanged(QImage src_image);
-    void DSRimageChanged(QImage dst_image);
+    void SRCimageChanged();
+    void DSRimageChanged();
 
 public slots:
 };

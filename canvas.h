@@ -8,15 +8,17 @@
 class Canvas : public QWidget
 {
     Q_OBJECT
-private /*fields*/:
+protected /*fields*/:
     Model *model;
     QImage image;
+    int image_width;
+    int image_height;
 
 public /*methods*/:
     explicit Canvas(Model *model, QWidget *parent = nullptr);
     virtual ~Canvas() override;
 
-private /*methods*/:
+protected /*methods*/:
     void paintEvent(QPaintEvent *event) override;
 
 signals:
