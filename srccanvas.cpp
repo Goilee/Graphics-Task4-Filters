@@ -2,6 +2,7 @@
 
 SrcCanvas::SrcCanvas(Model *model, QWidget *parent) : Canvas(model, parent)
 {
+    connect(this->model, SIGNAL(SRCimageChanged()), this, SLOT(updateImage()));
     this->updateImage();
 }
 

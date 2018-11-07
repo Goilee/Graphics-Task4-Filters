@@ -25,12 +25,23 @@ MainWindow::MainWindow(QWidget *parent) :
                                                     QString(),
                                                     tr("Images (*.png *.jpg *.gif *.bmp)")));
     }
-    this->model = new Model(image);  // TODO загрузка файла вместо QImage()
+    this->model = new Model(image, this);  // TODO загрузка файла вместо QImage()
 
     QLayout *layout = new QHBoxLayout();
     layout->addWidget(new SrcCanvas(this->model));
     layout->addWidget(new DstCanvas(this->model));
     this->ui->centralWidget->setLayout(layout);
+
+    this->controller = new Controller(this->model, this);
+
+    QAction *cp_src_to_dst_action = new QAction(QString("SRC to DST"));
+    cp_src_to_dst_action->setToolTip(QString("Копировать изображение из левой зоны в правую"));
+    connect(cp_src_to_dst_action, SIGNAL(triggered()), this->controller, SLOT(CpSRCtoDST()));
+    QAction *cp_dst_to_src_action = new QAction(QString("DST to SRC"));
+    cp_src_to_dst_action->setToolTip(QString("Копировать изображение из левой зоны в правую"));
+    connect(cp_dst_to_src_action, SIGNAL(triggered()), this->controller, SLOT(CpDSTtoSRC()));
+    this->ui->mainToolBar->addAction(cp_src_to_dst_action);
+    this->ui->mainToolBar->addAction(cp_dst_to_src_action);
 }
 
 MainWindow::~MainWindow()

@@ -26,5 +26,5 @@ void Model::setSRCimage(QImage image)
 void Model::setDSTimage(QImage image)
 {
     this->dst_image = image;
-    emit this->DSRimageChanged();
+    emit this->DSTimageChanged();
 }

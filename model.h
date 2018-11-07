@@ -25,7 +25,7 @@ private /*methods*/:
 
 signals:
     void SRCimageChanged();
-    void DSRimageChanged();
+    void DSTimageChanged();
 
 public slots:
 };

@@ -25,12 +25,12 @@ void Controller::saveToFile()
 
 void Controller::CpSRCtoDST()
 {
-    // TODO
+    this->model->setDSTimage(this->model->getSRCimage());
 }
 
 void Controller::CpDSTtoSRC()
 {
-    // TODO
+    this->model->setSRCimage(this->model->getDSTimage());
 }
 
 void Controller::Grayscale()
