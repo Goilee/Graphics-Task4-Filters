@@ -7,6 +7,14 @@ Model::Model(QImage src_image, QObject *parent) :
 
 }
 
+void Model::newModel(QImage image)
+{
+    this->src_image = image;
+    this->dst_image = QImage();
+    emit this->SRCimageChanged();
+    emit this->DSTimageChanged();
+}
+
 QImage Model::getSRCimage()
 {
     return this->src_image;

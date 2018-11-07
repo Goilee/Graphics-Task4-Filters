@@ -22,6 +22,7 @@ public /*methods*/:
 private /*methods*/:
     void setSRCimage(QImage image);
     void setDSTimage(QImage image);
+    void newModel(QImage image);
 
 signals:
     void SRCimageChanged();
