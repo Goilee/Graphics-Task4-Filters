@@ -1,6 +1,16 @@
 #include "srccanvas.h"
 
-SrcCanvas::SrcCanvas(QWidget *parent) : QWidget(parent)
+SrcCanvas::SrcCanvas(Model *model, QWidget *parent) : Canvas(model, parent)
 {
 
+}
+
+SrcCanvas::~SrcCanvas()
+{
+
+}
+
+void SrcCanvas::updateImage()
+{
+    // TODO
 }

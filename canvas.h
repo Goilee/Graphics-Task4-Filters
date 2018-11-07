@@ -14,8 +14,7 @@ private /*fields*/:
 
 public /*methods*/:
     explicit Canvas(Model *model, QWidget *parent = nullptr);
-    virtual ~Canvas() override
-    { }
+    virtual ~Canvas() override;
 
 private /*methods*/:
     void paintEvent(QPaintEvent *event) override;
@@ -23,7 +22,7 @@ private /*methods*/:
 signals:
 
 public slots:
-    virtual void updateImage();
+    virtual void updateImage() = 0;
 };
 
 #endif // CANVAS_H

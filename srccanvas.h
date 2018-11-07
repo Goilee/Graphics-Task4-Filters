@@ -1,17 +1,19 @@
 #ifndef SRCCANVAS_H
 #define SRCCANVAS_H
 
-#include <QWidget>
+#include "canvas.h"
 
-class SrcCanvas : public QWidget
+class SrcCanvas : public Canvas
 {
     Q_OBJECT
 public:
-    explicit SrcCanvas(QWidget *parent = nullptr);
+    explicit SrcCanvas(Model *model, QWidget *parent = nullptr);
+    ~SrcCanvas() override;
 
 signals:
 
 public slots:
+    void updateImage() override;
 };
 
-#endif // SRCCANVAS_H
+#endif // CANVAS_H

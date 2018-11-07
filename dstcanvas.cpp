@@ -1,6 +1,16 @@
 #include "dstcanvas.h"
 
-DstCanvas::DstCanvas(QWidget *parent) : QWidget(parent)
+DstCanvas::DstCanvas(Model *model, QWidget *parent) : Canvas(model, parent)
 {
 
+}
+
+DstCanvas::~DstCanvas()
+{
+
+}
+
+void DstCanvas::updateImage()
+{
+    // TODO
 }

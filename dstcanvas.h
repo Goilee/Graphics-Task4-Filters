@@ -1,17 +1,19 @@
 #ifndef DSTCANVAS_H
 #define DSTCANVAS_H
 
-#include <QWidget>
+#include "canvas.h"
 
-class DstCanvas : public QWidget
+class DstCanvas : public Canvas
 {
     Q_OBJECT
 public:
-    explicit DstCanvas(QWidget *parent = nullptr);
+    explicit DstCanvas(Model *model, QWidget *parent = nullptr);
+    ~DstCanvas() override;
 
 signals:
 
 public slots:
+    void updateImage() override;
 };
 
 #endif // DSTCANVAS_H
