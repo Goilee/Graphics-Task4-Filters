@@ -65,6 +65,8 @@ EdgeDetectionDialog::EdgeDetectionDialog() :
     base_layout->addWidget(blue_slider_widget);
 
     this->setLayout(base_layout);
+
+    emit this->applied(this->red_slider->value(), this->green_slider->value(), this->blue_slider->value());
 }
 
 void EdgeDetectionDialog::applyRedSlider()

@@ -82,6 +82,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->filter_bar->addAction(createAction(QString("Тиснение"),
                                                  QString("Тиснение"),
                                                  this->controller, SLOT(embossing())));
+    this->ui->filter_bar->addAction(createAction(QString("Аквалеризация"),
+                                                 QString("Аквалеризация"),
+                                                 this->controller, SLOT(watercolor())));
+    this->ui->filter_bar->addAction(createAction(QString("Гамма"),
+                                                 QString("Гамма коррекция"),
+                                                 this->controller, SLOT(gamma())));
     this->ui->filter_bar->addAction(createAction(QString("Матричное преобразование"),
                                                  QString("Произвольное матричное 3х3 преобразование"),
                                                  this->controller, SLOT(matrixTransmition())));

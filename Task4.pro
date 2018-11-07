@@ -35,7 +35,8 @@ SOURCES += \
     dstcanvas.cpp \
     maskparamdialog.cpp \
     mask.cpp \
-    edgedetectiondialog.cpp
+    edgedetectiondialog.cpp \
+    gammadialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +48,8 @@ HEADERS += \
     dstcanvas.h \
     maskparamdialog.h \
     mask.h \
-    edgedetectiondialog.h
+    edgedetectiondialog.h \
+    gammadialog.h
 
 FORMS += \
         mainwindow.ui

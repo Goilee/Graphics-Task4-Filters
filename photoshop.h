@@ -14,7 +14,7 @@ namespace photoshop
     QImage negative(QImage image);
     QImage embossing(QImage image);
     QImage watercolor(QImage image);
-    QImage gamma(QImage image);
+    QImage gamma(QImage image, double gamma);
     QImage matrixTransmition(QImage image, Mask mask);
 }
 

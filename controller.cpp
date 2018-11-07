@@ -5,16 +5,20 @@
 
 Controller::Controller(Model *model, QObject *parent) :
     QObject(parent),
-    model(model), mask(Mask()), edge_dialog(new EdgeDetectionDialog())
+    model(model), mask(Mask()),
+    edge_dialog(new EdgeDetectionDialog()), gamma_dialog(new GammaDialog())
 {
     this->mask_dialog = new MaskParamDialog(&this->mask);
     connect(this->mask_dialog, SIGNAL(applied()), this, SLOT(applyMatrixTransmition()));
+    connect(this->edge_dialog, SIGNAL(applied(int, int, int)), this, SLOT(applyEdgeDetection(int, int, int)));
+    connect(this->gamma_dialog, SIGNAL(applied(double)), this, SLOT(applyGamma(double)));
 }
 
 Controller::~Controller()
 {
     delete this->edge_dialog;
     delete this->mask_dialog;
+    delete this->gamma_dialog;
 }
 
 void Controller::newFile()
@@ -67,7 +71,6 @@ void Controller::grayscale()
 
 void Controller::edgeDetection()
 {
-    connect(this->edge_dialog, SIGNAL(applied(int, int, int)), this, SLOT(applyEdgeDetection(int, int, int)));
     this->edge_dialog->show();
 }
 
@@ -103,12 +106,17 @@ void Controller::embossing()
 
 void Controller::watercolor()
 {
-    // TODO
+    this->model->setDSTimage(photoshop::watercolor(this->model->getSRCimage()));
 }
 
 void Controller::gamma()
 {
-    // TODO
+    this->gamma_dialog->show();
+}
+
+void Controller::applyGamma(double gamma)
+{
+    this->model->setDSTimage(photoshop::gamma(this->model->getSRCimage(), gamma));
 }
 
 void Controller::matrixTransmition()

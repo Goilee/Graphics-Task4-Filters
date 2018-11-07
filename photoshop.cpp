@@ -1,4 +1,5 @@
 #include "photoshop.h"
+#include <math.h>
 
 int doubleToColorComponent(double val)
 {
@@ -160,13 +161,13 @@ namespace photoshop
     {
         Mask mask = Mask();
         mask.set(-1, -1, 0);
-        mask.set(-1, 0, 1);
+        mask.set(-1, 0, -1);
         mask.set(-1, 1, 0);
-        mask.set(0, -1, -1);
+        mask.set(0, -1, 1);
         mask.set(0, 0, 0);
-        mask.set(0, 1, 1);
+        mask.set(0, 1, -1);
         mask.set(1, -1, 0);
-        mask.set(1, 0, -1);
+        mask.set(1, 0, 1);
         mask.set(1, 1, 0);
         mask.setNorm(1);
         mask.setRedShift(128);
@@ -177,13 +178,52 @@ namespace photoshop
 
     QImage watercolor(QImage image)
     {
-        // TODO
-        return image;
+        QImage result = QImage(image);
+        int width = image.width();
+        int height = image.height();
+        for (int y = 2; y < height - 2; y++)
+        {
+            for (int x = 2; x < width - 2; x++)
+            {
+                std::vector<int> red_list = std::vector<int>();
+                std::vector<int> green_list = std::vector<int>();
+                std::vector<int> blue_list = std::vector<int>();
+                for (int i = -2; i < 3; i++)
+                {
+                    for (int j = -2; j < 3; j++)
+                    {
+                        QColor color = image.pixelColor(x + i, y + j);
+                        red_list.push_back(color.red());
+                        green_list.push_back(color.green());
+                        blue_list.push_back(color.blue());
+                    }
+                }
+                std::sort(red_list.begin(), red_list.end());
+                std::sort(green_list.begin(), green_list.end());
+                std::sort(blue_list.begin(), blue_list.end());
+
+                result.setPixelColor(x, y, QColor(red_list.at(12), green_list.at(12), blue_list.at(12)));
+            }
+        }
+
+        return photoshop::sharpen(result);
     }
 
-    QImage gamma(QImage image)
+    QImage gamma(QImage image, double gamma)
     {
-        // TODO
+        int width = image.width();
+        int height = image.height();
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                QColor color = image.pixelColor(x, y);
+                int red = (int) (pow((double)color.red() / 255, gamma) * 255 + 0.5);
+                int green = (int) (pow((double)color.green() / 255, gamma) * 255 + 0.5);
+                int blue = (int) (pow((double)color.blue() / 255, gamma) * 255 + 0.5);
+                image.setPixelColor(x, y, QColor(red, green, blue));
+            }
+        }
         return image;
     }
 
