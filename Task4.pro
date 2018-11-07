@@ -26,10 +26,22 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    controller.cpp \
+    photoshop.cpp \
+    model.cpp \
+    canvas.cpp \
+    srccanvas.cpp \
+    dstcanvas.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    controller.h \
+    photoshop.h \
+    model.h \
+    canvas.h \
+    srccanvas.h \
+    dstcanvas.h
 
 FORMS += \
         mainwindow.ui

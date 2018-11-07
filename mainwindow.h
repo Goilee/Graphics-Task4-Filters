@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "controller.h"
+#include "model.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Controller *controller;
+    Model *model;
 };
 
 #endif // MAINWINDOW_H

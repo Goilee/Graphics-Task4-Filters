@@ -1,0 +1,18 @@
+#include "canvas.h"
+
+Canvas::Canvas(Model *model, QWidget *parent) :
+    QWidget(parent),
+    model(model), image(QImage())
+{
+
+}
+
+Canvas::~Canvas()
+{
+    
+}
+
+void Canvas::paintEvent(QPaintEvent *)
+{
+    // TODO
+}
