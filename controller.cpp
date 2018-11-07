@@ -2,11 +2,10 @@
 #include "photoshop.h"
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QDialog>
 
 Controller::Controller(Model *model, QObject *parent) :
     QObject(parent),
-    model(model), mask(Mask())
+    model(model), mask(Mask()), edge_dialog(new EdgeDetectionDialog())
 {
     this->mask_dialog = new MaskParamDialog(&this->mask);
     connect(this->mask_dialog, SIGNAL(applied()), this, SLOT(applyMatrixTransmition()));
@@ -14,7 +13,8 @@ Controller::Controller(Model *model, QObject *parent) :
 
 Controller::~Controller()
 {
-
+    delete this->edge_dialog;
+    delete this->mask_dialog;
 }
 
 void Controller::newFile()
@@ -67,22 +67,13 @@ void Controller::grayscale()
 
 void Controller::edgeDetection()
 {
-    /*this->mask.set(-1, -1, 0);
-    this->mask.set(-1, 0, -1);
-    this->mask.set(-1, 1, 0);
-    this->mask.set(0, -1, -1);
-    this->mask.set(0, 0, 4);
-    this->mask.set(0, 1, -1);
-    this->mask.set(1, -1, 0);
-    this->mask.set(1, 0, -1);
-    this->mask.set(1, 1, 0);
-    this->mask.setNorm(1);
-    */
+    connect(this->edge_dialog, SIGNAL(applied(int, int, int)), this, SLOT(applyEdgeDetection(int, int, int)));
+    this->edge_dialog->show();
 }
 
-void Controller::applyEdgeDetection()
+void Controller::applyEdgeDetection(int red_threshold, int green_threshold, int blue_threshold)
 {
-    // TODO
+    this->model->setDSTimage(photoshop::edgeDetection(this->model->getSRCimage(), red_threshold, green_threshold, blue_threshold));
 }
 
 void Controller::blur()

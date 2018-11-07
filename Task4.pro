@@ -34,7 +34,8 @@ SOURCES += \
     srccanvas.cpp \
     dstcanvas.cpp \
     maskparamdialog.cpp \
-    mask.cpp
+    mask.cpp \
+    edgedetectiondialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     srccanvas.h \
     dstcanvas.h \
     maskparamdialog.h \
-    mask.h
+    mask.h \
+    edgedetectiondialog.h
 
 FORMS += \
         mainwindow.ui

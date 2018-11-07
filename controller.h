@@ -5,6 +5,7 @@
 #include "model.h"
 #include "mask.h"
 #include "maskparamdialog.h"
+#include "edgedetectiondialog.h"
 
 class Controller : public QObject
 {
@@ -13,7 +14,7 @@ private /*fields*/:
     Model *model;
     Mask mask;
     MaskParamDialog *mask_dialog;
-
+    EdgeDetectionDialog *edge_dialog;
 
 public /*methods*/:
     explicit Controller(Model *model, QObject *parent = nullptr);
@@ -39,7 +40,7 @@ public slots:
 
 private slots:
     void applyMatrixTransmition();
-    void applyEdgeDetection();
+    void applyEdgeDetection(int red_threshold, int greeen_threshold, int blue_threshold);
 };
 
 #endif // CONTROLLER_H

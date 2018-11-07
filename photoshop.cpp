@@ -39,10 +39,60 @@ namespace photoshop
         return image;
     }
 
-    QImage edgeDetection(QImage image)
+    QImage edgeDetection(QImage image, int red_threshold, int green_threshold, int blue_threshold)
     {
-        // TODO
-        return image;
+        Mask mask = Mask();
+        mask.set(-1, -1, 0);
+        mask.set(-1, 0, -1);
+        mask.set(-1, 1, 0);
+        mask.set(0, -1, -1);
+        mask.set(0, 0, 4);
+        mask.set(0, 1, -1);
+        mask.set(1, -1, 0);
+        mask.set(1, 0, -1);
+        mask.set(1, 1, 0);
+        mask.setNorm(1);
+        mask.setRedShift(0);
+        mask.setGreenShift(0);
+        mask.setBlueShift(0);
+        QImage result = photoshop::matrixTransmition(image, mask);
+
+        int height = result.height();
+        int width = result.width();
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                QColor color = result.pixelColor(x, y);
+                if (color.red() > red_threshold)
+                {
+                    color.setRed(255);
+                }
+                else
+                {
+                    color.setRed(0);
+                }
+                if (color.green() > green_threshold)
+                {
+                    color.setGreen(255);
+                }
+                else
+                {
+                    color.setGreen(0);
+                }
+                if (color.blue() > blue_threshold)
+                {
+                    color.setBlue(255);
+                }
+                else
+                {
+                    color.setBlue(0);
+                }
+                result.setPixelColor(x, y, color);
+            }
+        }
+
+        return result;
     }
 
     QImage blur(QImage image)

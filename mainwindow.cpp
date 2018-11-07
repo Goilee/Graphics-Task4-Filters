@@ -64,6 +64,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->filter_bar->addAction(createAction(QString("Оттенки серого"),
                                                  QString("Перевести изображение в оттенки серого"),
                                                  this->controller, SLOT(grayscale())));
+    this->ui->filter_bar->addAction(createAction(QString("Выделение контуров"),
+                                                 QString("Выделение контуров по каждой из цветовых компонент"),
+                                                 this->controller, SLOT(edgeDetection())));
     this->ui->filter_bar->addAction(createAction(QString("Сглаживание"),
                                                  QString("Размытие изображения"),
                                                  this->controller, SLOT(blur())));
